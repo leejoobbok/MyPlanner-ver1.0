@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$("#loginBtn").click(function(){
+			var userName = document.getElementById("userName").value;
+			var password = document.getElementById("password").value;
+			
+			$.ajax(
+					{
+						type:"POST"
+						, url:"checklogin"
+						, data:{ userName: userName,
+							     password: password }
+						, contentType:  "application/x-www-form-urlencoded; charset=UTF-8"
+						, success:function(result)
+						{
+							if (result == 1)
+							{
+								  document.getElementById("loginForm").submit();
+							}
+							else
+							{
+								alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+								return;
+							}
+						}
+						, error:function(e)
+						{
+							alert(e.responseText);
+						}
+						
+					});
+		});
+	});
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+	<div align="center">
+    	<h1 class="display-2">Login</h1>
+    </div>
+    <form action="login" id="loginForm" method="post">
+<!--       
+        <div id="loginfail" class="alert alert-danger">
+        </div>
+        <div id="logout" class="alert alert-success">
+        </div>
+ -->   
+ 	<div class="container">   
+        <div class="mb-5">
+            <label for="username">사용자명:</label>
+            <input type="text" id="userName" name="userName" class="form-control" required />
+        </div>
+        <div class="mb-5">
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+        <br />
+        <div align="center">
+        	<button type="button" id="loginBtn" class="btn btn-primary btn-lg">Login</button>
+    	</div>
+    </div>
+    </form>
+</body>
+</html>

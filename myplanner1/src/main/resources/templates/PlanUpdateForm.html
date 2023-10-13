@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<head>
+<meta charset="EUC-KR">
+<title>일정 수정</title>
+<style type="text/css">
+/* 
+    #title {
+      width: 695px; /* 원하는 넓이로 조정하세요 */
+    }
+  */   
+</style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+	function updateCancle(planNo){
+		var planno = planNo
+		window.location.href="/myplanner/plan?planno="+planno;
+	}
+
+	$(function() {
+		  $("#doDate").datepicker({
+			    dateFormat: 'yy-mm-dd', // 날짜 형식을 'yy-mm-dd'로 설정
+			  });
+	  });
+	
+	$(function() {
+		  $("#finishCheck").datepicker({
+			    dateFormat: 'yy-mm-dd', // 날짜 형식을 'yy-mm-dd'로 설정
+			  });
+	  });
+</script>
+</head>
+<body>
+<div class="container mt-5">
+	<form id="planUpdateArea" action="/myplanner/planupdate" method="post">
+		<input type="hidden" name="_method" value="PUT">
+	<div class="text-center mb-4">
+           	<div align="center">
+		    	<h2 class="display-2">게시물 수정</h2>
+		    </div>
+    </div>	
+	<div class="mb-3">
+		<label for="createdDate" class="form-label">
+			<h6>작성일 | <span th:text="${planUpdateDto.createdDate}"></span></h5>
+		</label>
+	</div>	
+	<div class="mb-3">
+		<label for="doDate" class="form-label">진행 예정 및 마감일</label> &nbsp;
+		 <input type="text" id="doDate" name="doDate" required="required" class="form-control"
+				th:value="${planUpdateDto.doDate}">
+	</div>
+	<div class="mb-3">
+		<label for="title" class="form-label">제목 </label>
+		<br />
+		<input type="text" id="title" name="title" required="required" class="form-control"
+						    th:value="${planUpdateDto.title}">
+   </div>
+	<div class="mb-3">
+		<label for="content" class="form-label">내용</label>
+		 <br />
+		 <textarea rows="20" cols="100" placeholder="일정 내용 입력" id="content" name="content" class="form-control"
+							th:text="${planUpdateDto.content}"></textarea>
+	</div>
+	<div class="mb-3">
+		<label for="finishCheck" class="form-label">완료한 날짜</label>
+		 <br />
+		 <input type="text" id="finishCheck" name="finishCheck" class="form-control"
+							th:value="${planUpdateDto.finishCheck}">
+	</div>
+	<div class="mb-3" align="right">
+	<br />
+		<input type="hidden" id="planNo" name="planNo" th:value="${planUpdateDto.planNo}">
+		<button type="submit" class="btn btn-primary">수정완료</button>
+		<button type=button class="btn btn-danger" th:onclick="|updateCancle(${planUpdateDto.planNo})|">취소</button>
+	</div>
+	</form>
+</div>
+
+</body>
+</html>

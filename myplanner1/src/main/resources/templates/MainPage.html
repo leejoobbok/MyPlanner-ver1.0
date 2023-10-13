@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/total.css}" />
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	
+<script type="text/javascript">
+
+	function turnFinishCheck(planno) {
+	    $.ajax({
+	        type: "POST",
+	        url: "turnfinishcheck",
+	        data: { planNo: planno },
+	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	        success: function(result) {
+	            //alert(result);
+	        },
+	        error: function(e) {
+	            alert(e.responseText);
+	        }
+	    });
+	}
+</script>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+	<div align="center">
+    	<h1 class="display-2">My Planner</h1>
+    </div>
+    <div align="left">
+    	<button type="button" class="btn btn-secondary" onclick="window.location.href='/myplanner/logout'">로그아웃</button>
+    </div>
+    <div align="right">
+	    <form action="/myplanner/searchmainpage" method="get">
+	    	<input type="text" id="keyword" name="keyword"/>
+	    	<button type="submit" class="btn">검색</button>
+	    </form>
+    </div>
+<table class="table">
+<thead>
+<tr>
+	<th>일정 번호</th>
+	<!-- <th>게시물번호</th> -->
+	<th>일정</th>
+	<th>제목</th>
+	<th>작성일</th>
+	<th>완료 여부</th>
+</tr>
+<thead>
+	<tr th:each="plan : ${planlist}">
+		<td th:text="${plan.planNo}"></td>
+		<!-- <td th:text="${plan.rowNum}"></td> -->
+		<td th:text="${plan.doDate}"></td>
+		<td><a th:href="@{/myplanner/plan(planno=${plan.planNo})}" th:text="${plan.title}"></a></td>
+		<td th:text="${plan.createdDate}"></td>
+		<td th:if="${plan.finishCheck != null}"><input  type="checkbox" checked="checked" th:value="${plan.planNo}"
+			th:onchange="|turnFinishCheck(${plan.planNo})|"></td>
+		<td th:if="${plan.finishCheck == null}"><input  type="checkbox" th:value="${plan.planNo}"
+			th:onchange="|turnFinishCheck(${plan.planNo})|"></td>
+	</tr>
+</table>
+	
+ 	<div align="right">
+		<button type="button" class="btn"
+		onclick="window.location.href='/myplanner/planinsertform'">일정 추가</button>
+	</div>
+ 
+	<div align="center">
+	<ul class="pagination" >
+		<li class="page-item">
+			<a th:href="@{/myplanner/mainpage(pageset=${pageset}-1, pagenum=${pagenum}-10)}" th:if="${pageset != 1}" >이전</a>
+		</li>
+		<li class="page-item" th:each="page, pageIdx : ${pagelist}">
+			<a th:href="@{/myplanner/mainpage(pageset=${page.pageSet}, pagenum=${page.pageNum})}" th:text="${page.pageNum}"></a>
+		</li>
+		<li class="page-item">
+			<a th:href="@{/myplanner/mainpage(pageset=${pageset}+1, pagenum=${pagenum}+10)}">다음</a>
+		</li>
+	</ul>
+	</div>
+</body>
+</html>

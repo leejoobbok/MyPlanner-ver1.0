@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/total.css}" />
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	
+	function moveToModify(planNo, keyword){
+		var planno = planNo;
+		var keyword = keyword;
+		window.location.href="/myplanner/searchplan/updateform?planno="+planno+"&keyword="+keyword;
+	}
+	
+	function moveToIndex(pageSet, pageNum, keyword){
+		var pageset = pageSet;
+		var pagenum = pageNum;
+		var keyword = keyword;
+		window.location.href="/myplanner/searchmainpage?pageset="+pageset+"&pagenum="+pagenum+"&keyword="+keyword;
+	}
+	
+	function planDelete(planNo, pageSet, pageNum, keyword){
+		var planno = planNo;
+		var pageset = pageSet;
+		var pagenum = pageNum;
+		var keyword = keyword;
+		
+		if(confirm("정말 삭제하시겠습니까?")){
+			alert("삭제 완료");
+			window.location.href="/myplanner/searchplandelete?planno="+planno+"&pageset="+pageset+"&pagenum="+pagenum+"&keyword="+keyword;
+		}
+		else{
+			return;
+		}
+	}
+
+</script>
+<head>
+<title>일정</title>
+</head>
+<body>
+
+<div class="container mt-5" >
+	<div class="text-center mb-4">
+		<div align="center">
+			<h2>My Scehdule</h2>
+		</div>
+	</div>
+	<div class="mb-3">
+		<label for="createdDate" class="form-label">
+				<h6>작성일 : <span th:text="${searchplanviewdto.createdDate}"></span></h6>
+		</label>
+		<br />
+		<label for="title" class="form-label">제목</label>
+			<h2><div th:text="${searchplanviewdto.title}"></h2>	
+		
+	</div>
+		<hr />
+	<div class="mb-3">
+		<label for="doDate" class="form-label">진행 예정 및 마감일</label>
+		<h2><div th:text="${searchplanviewdto.doDate}"></h2>
+	</div>
+		<hr />
+	<div class="mb-3">
+		<label for="content" class="form-label">내용</label>
+		<br />
+		<div class="col-xs-10 box" th:text="${searchplanviewdto.content}"></div>
+		<hr /> 	
+	</div>
+	<div class="mb-3">
+		<label for="finishCheck" class="form-label">완료한 날짜 </label>
+		<h2><div th:text="${searchplanviewdto.finishCheck}"></div></h2>
+		<hr />
+	</div>
+	<div class="mb-3" align="right" >
+		<button type="button" class="btn btn-secondary"
+		th:onclick="|moveToModify(${searchplanviewdto.planNo}, '${keyword}')|">수정</button>
+<!-- 		
+		<button type="button">
+			<a th:href="@{/myplanner/mainpage(pageset=${planviewdto.pageSet}, pagenum=${planviewdto.pageNum})}">목록으로</a>
+		</button>
+ -->		
+		<button type="button" class="btn btn-secondary"
+		th:onclick="|moveToIndex(${searchplanviewdto.pageSet}, ${searchplanviewdto.pageNum}, '${keyword}')|">목록으로</button>
+	
+		<button type="button"  class="btn btn-danger"
+		th:onclick="|planDelete(${searchplanviewdto.planNo},${searchplanviewdto.pageSet},${searchplanviewdto.pageNum},'${keyword}')|">삭제</button>
+	</div>
+	
+</div>
+
+</body>
+</html>
