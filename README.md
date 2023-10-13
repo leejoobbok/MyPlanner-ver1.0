@@ -1,7 +1,7 @@
 ## MyPlanner-ver1.0
 MyPlanner-ver1.0 (personal project 2023-10-14)
 : Spring Boot + thymeleaf로 제작한 일정 관리 어플리케이션
-
+<br>
 ## 프로젝트 소개
 - 프로젝트 유형 : 개인 프로젝트
 - 프로젝트 명 : MyPlanner
@@ -10,12 +10,12 @@ MyPlanner-ver1.0 (personal project 2023-10-14)
 
 ## 🕰️ 개발 소요 기간
 - 사전 "학습" 및 설계, 자료 조사, 모든 과정 포함하여 약 2주 소요
- 
+ <br>
 ## 🧑‍🤝‍🧑 전체 기능 구성
 - 암호화 복호화 패키지를 사용한 계정 등록 로그인
 - 일정 등록, 수정, 삭제, 검색, 조회 기능 (CRUD 기능 + 검색 구현)
 - 달력 api 사용 
-
+<br>
 ## ⚙️ 개발 환경
 - `Java 11`
 - `JDK 11`
@@ -25,7 +25,7 @@ MyPlanner-ver1.0 (personal project 2023-10-14)
 - **ORM** : Mybatis
 - **View** : Thymeleaf, JQuery, Bootstrap
 - **build toll** : Maven
-- 
+<br> 
 ## 📌 주요 기능
 - 로그인 및 로그아웃
 - 일정 등록
@@ -33,7 +33,7 @@ MyPlanner-ver1.0 (personal project 2023-10-14)
 - 일정 삭제
 - 일정 검색
 - 일정 조회
-
+<br>
 ## 파일 구성
 - DTO (클래스명.java) -> 입력 또는 출력 할 데이터를 변수에 담는 역할
 - DAO (인터페이스명.java) -> 매핑 시킬 추상 메소드와 반환 데이터 타입, 매개변수 지정
