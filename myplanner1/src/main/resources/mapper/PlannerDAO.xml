@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.project.myplanner1.dao.IPlannerDAO">
+	  <select id="checkPlanList" resultType="java.lang.Integer">
+	  	SELECT COUNT(*) AS COUNT
+		FROM PLANNER
+		WHERE CODE=#{code}
+	  </select>
+	  
+  	  <select id="showPlanListHome" resultType="com.springboot.project.myplanner1.dto.PlannerDTO">
+		SELECT PAGESET, PAGENUM, ROWNUM, PLANNO, TITLE , CONTENT
+		      , TO_CHAR(CREATEDDATE, 'YYYY-MM-DD') AS CREATEDDATE
+			  , TO_CHAR(DODATE, 'YYYY-MM-DD') AS DODATE
+			  , TO_CHAR(FINISHCHECK, 'YYYY-MM-DD') AS FINISHCHECK
+		FROM
+		(
+		    SELECT DISTINCT TRUNC(((ROWNUM-1)/10)/10)+1 AS PAGESET , PAGENUM, ROWNUM, PLANNO, TITLE , CONTENT, CREATEDDATE, DODATE, FINISHCHECK
+		    FROM
+		    (
+		        SELECT DISTINCT TRUNC((ROWNUM-1)/10)+1 AS PAGENUM, ROWNUM, PLANNO, TITLE , CONTENT, CREATEDDATE, DODATE, FINISHCHECK
+		        FROM
+		            (
+		            SELECT ROWNUM ,PLANNO, TITLE, CONTENT, CREATEDDATE, DODATE, FINISHCHECK
+		            FROM PLANNER
+		            WHERE CODE = #{code}
+		            ORDER BY PLANNO DESC
+		            )
+		        ORDER BY PLANNO DESC
+		    )
+		    ORDER BY PLANNO DESC
+		)
+		WHERE PAGESET = #{pageSet} AND PAGENUM = #{pageNum} 
+		ORDER BY PLANNO DESC
+	  </select>
+	  
+	  <select id="showPlanListMain" resultType="com.springboot.project.myplanner1.dto.PlannerDTO">
+		SELECT PAGESET, PAGENUM, ROWNUM, PLANNO, TITLE , CONTENT
+		      , TO_CHAR(CREATEDDATE, 'YYYY-MM-DD') AS CREATEDDATE
+			  , TO_CHAR(DODATE, 'YYYY-MM-DD') AS DODATE
+			  , TO_CHAR(FINISHCHECK, 'YYYY-MM-DD') AS FINISHCHECK
+		FROM
+		(
+		    SELECT DISTINCT TRUNC(((ROWNUM-1)/10)/10)+1 AS PAGESET , PAGENUM, ROWNUM, PLANNO, TITLE , CONTENT, CREATEDDATE, DODATE, FINISHCHECK
+		    FROM
+		    (
+		        SELECT DISTINCT TRUNC((ROWNUM-1)/10)+1 AS PAGENUM, ROWNUM, PLANNO, TITLE , CONTENT, CREATEDDATE, DODATE, FINISHCHECK
+		        FROM
+		            (
+		            SELECT ROWNUM ,PLANNO, TITLE, CONTENT, CREATEDDATE, DODATE, FINISHCHECK
+		            FROM PLANNER
+		            WHERE CODE = #{code}
+		            ORDER BY PLANNO DESC
+		            )
+		        ORDER BY PLANNO DESC
+		    )
+		    ORDER BY PLANNO DESC
+		)
+		WHERE PAGESET = #{pageSet} AND PAGENUM = #{pageNum} 
+		ORDER BY PLANNO DESC
+	  </select>
+	  
+	  <update id="turnFinishCheck" parameterType="java.lang.Integer">
+	  	UPDATE PLANNER
+		SET FINISHCHECK = CASE WHEN FINISHCHECK IS NULL THEN SYSDATE
+		                       WHEN FINISHCHECK IS NOT NULL THEN NULL 
+		                       END
+		WHERE PLANNO = #{planNo}
+	  </update>
+	  
+<!-- 	  
+	  <select id="showPlanList" resultType="com.springboot.project.myplanner1.dto.PlannerDTO">
+	 	SELECT  ROWNUM AS rowNum, PLANNO AS planNo, CODE AS code
+	 		  , DODATE AS doDate, TITLE as Title
+	 		  , CONTENT AS content, CREATEDDATE AS createdDate
+	 		  , FINISHCHECK AS finishCheck
+		FROM PLANNER
+		WHERE CODE=#{code}
+	  </select>
+ -->	  
+	  
+</mapper>

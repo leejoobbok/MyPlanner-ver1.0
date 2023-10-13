@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.project.myplanner1.dao.IPagingDAO">
+
+	<select id="checkPaging" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM PLANNER
+		WHERE CODE=#{code}
+	</select>
+	
+	<select id="pagingList" resultType="com.springboot.project.myplanner1.dto.PagingDTO">
+		SELECT PAGESET, PAGENUM
+		FROM
+		(
+		    SELECT DISTINCT TRUNC(((ROWNUM-1)/100)+1) AS PAGESET , PAGENUM
+		    FROM
+		        (
+		        SELECT DISTINCT TRUNC((ROWNUM-1)/10)+1 AS PAGENUM, ROWNUM
+		        FROM PLANNER
+		        WHERE CODE=#{code}
+		        ORDER BY ROWNUM
+		        )
+		    ORDER BY PAGENUM ASC
+		)
+		WHERE PAGESET = #{pageSet}
+	</select>
+
+</mapper>
