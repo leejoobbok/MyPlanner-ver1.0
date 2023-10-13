@@ -1,4 +1,4 @@
-# MyPlanner-ver1.0
+## MyPlanner-ver1.0
 MyPlanner-ver1.0 (personal project 2023-10-14)
 : Spring Boot + thymeleaf로 제작한 일정 관리 어플리케이션
 
@@ -11,12 +11,12 @@ MyPlanner-ver1.0 (personal project 2023-10-14)
 ## 🕰️ 개발 소요 기간
 - 사전 "학습" 및 설계, 자료 조사, 모든 과정 포함하여 약 2주 소요
  
-### 🧑‍🤝‍🧑 전체 기능 구성
+## 🧑‍🤝‍🧑 전체 기능 구성
 - 암호화 복호화 패키지를 사용한 계정 등록 로그인
 - 일정 등록, 수정, 삭제, 검색, 조회 기능 (CRUD 기능 + 검색 구현)
 - 달력 api 사용 
 
-### ⚙️ 개발 환경
+## ⚙️ 개발 환경
 - `Java 11`
 - `JDK 11`
 - **IDE** : Eclipse 4.21
