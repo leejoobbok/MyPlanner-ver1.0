@@ -22,12 +22,12 @@ MyPlanner-ver1.0 (personal project 2023-10-14)
 ## ⚙️ 개발 환경
 - `Java 11`
 - `JDK 11`
-- **IDE** : Eclipse 4.21
-- **Framework** : Springboot(2.x)
-- **Database** : Oracle DB(11xe)
-- **ORM** : Mybatis
-- **View** : Thymeleaf, JQuery, Bootstrap
-- **build toll** : Maven
+- **IDE** : 'Eclipse 4.21'
+- **Framework** : 'Springboot(2.x)'
+- **Database** : 'Oracle DB(11g)'
+- **ORM** : 'Mybatis'
+- **View** : 'Thymeleaf', 'JQuery', 'Bootstrap'
+- **build toll** : 'Maven'
 <br>
 
 ## 📌 주요 기능
@@ -40,6 +40,118 @@ MyPlanner-ver1.0 (personal project 2023-10-14)
 <br>
 
 ## 파일 구성
+```
+📦 
+.gitignore
+README.md
+myplanner-ver1.zip
+└─ myplanner1
+   ├─ .gitignore
+   ├─ .mvn
+   │  └─ wrapper
+   │     ├─ maven-wrapper.jar
+   │     └─ maven-wrapper.properties
+   ├─ mvnw
+   ├─ mvnw.cmd
+   ├─ pom.xml
+   └─ src
+      ├─ main
+      │  ├─ java
+      │  │  └─ com
+      │  │     └─ springboot
+      │  │        └─ project
+      │  │           └─ myplanner1
+      │  │              ├─ Myplanner1Application.java
+      │  │              ├─ contoller
+      │  │              │  ├─ LoginFormController.java
+      │  │              │  ├─ MainPageController.java
+      │  │              │  ├─ PlanDeleteController.java
+      │  │              │  ├─ PlanInserController.java
+      │  │              │  ├─ PlanUpdateController.java
+      │  │              │  ├─ PlanViewController.java
+      │  │              │  ├─ SearchMainPageController.java
+      │  │              │  ├─ SearchPlanDeleteController.java
+      │  │              │  ├─ SearchPlanUpdateController.java
+      │  │              │  └─ SearchPlanViewController.java
+      │  │              ├─ dao
+      │  │              │  ├─ ILoginDAO.java
+      │  │              │  ├─ IPagingDAO.java
+      │  │              │  ├─ IPlanDeleteDAO.java
+      │  │              │  ├─ IPlanInsertDAO.java
+      │  │              │  ├─ IPlanUpdateDAO.java
+      │  │              │  ├─ IPlanViewDAO.java
+      │  │              │  ├─ IPlannerDAO.java
+      │  │              │  ├─ ISearchMainPageDAO.java
+      │  │              │  ├─ ISearchPagingDAO.java
+      │  │              │  ├─ ISearchPlanUpdateDAO.java
+      │  │              │  └─ ISearchPlanViewDAO.java
+      │  │              ├─ dto
+      │  │              │  ├─ AccountManageDTO.java
+      │  │              │  ├─ LoginDTO.java
+      │  │              │  ├─ PagingDTO.java
+      │  │              │  ├─ PlanDeleteDTO.java
+      │  │              │  ├─ PlanInsertDTO.java
+      │  │              │  ├─ PlanUpdateDTO.java
+      │  │              │  ├─ PlanViewDTO.java
+      │  │              │  ├─ PlannerDTO.java
+      │  │              │  ├─ SearchMainPageDTO.java
+      │  │              │  ├─ SearchPagingDTO.java
+      │  │              │  ├─ SearchPlanUpdateDTO.java
+      │  │              │  └─ SearchPlanViewDTO.java
+      │  │              └─ service
+      │  │                 ├─ LoginService.java
+      │  │                 ├─ PagingService.java
+      │  │                 ├─ PlanDeleteService.java
+      │  │                 ├─ PlanInsertService.java
+      │  │                 ├─ PlanUpdateService.java
+      │  │                 ├─ PlanViewService.java
+      │  │                 ├─ PlannerService.java
+      │  │                 ├─ SearchMainPageService.java
+      │  │                 ├─ SearchPagingService.java
+      │  │                 ├─ SearchPlanUpdateService.java
+      │  │                 └─ SearchPlanViewService.java
+      │  ├─ resources
+      │  │  ├─ application.properties
+      │  │  ├─ mapper
+      │  │  │  ├─ LoginDAO.xml
+      │  │  │  ├─ PagingDAO.xml
+      │  │  │  ├─ PlanDeleteDAO.xml
+      │  │  │  ├─ PlanInsertDAO.xml
+      │  │  │  ├─ PlanUpdateDAO.xml
+      │  │  │  ├─ PlanViewDAO.xml
+      │  │  │  ├─ PlannerDAO.xml
+      │  │  │  ├─ SearchMainPageDAO.xml
+      │  │  │  ├─ SearchPagingDAO.xml
+      │  │  │  ├─ SearchPlanUpdateDAO.xml
+      │  │  │  └─ SearchPlanViewDAO.xml
+      │  │  ├─ static
+      │  │  │  └─ css
+      │  │  │     └─ total.css
+      │  │  └─ templates
+      │  │     ├─ HomePage.html
+      │  │     ├─ LoginForm.html
+      │  │     ├─ MainPage.html
+      │  │     ├─ PlanInserForm.html
+      │  │     ├─ PlanUpdateForm.html
+      │  │     ├─ PlanView.html
+      │  │     ├─ SearchMainPage.html
+      │  │     ├─ SearchPlanUpdateForm.html
+      │  │     └─ SearchPlanView.html
+      │  └─ webapp
+      │     └─ WEB-INF
+      │        └─ lib
+      │           └─ ojdbc8.jar
+      └─ test
+         └─ java
+            └─ com
+               └─ springboot
+                  └─ project
+                     └─ myplanner1
+                        └─ Myplanner1ApplicationTests.java
+```
+<br>
+
+## 파일 설명
 - DTO (클래스명.java) -> 입력 또는 출력 할 데이터를 변수에 담는 역할
 - DAO (인터페이스명.java) -> 매핑 시킬 추상 메소드와 반환 데이터 타입, 매개변수 지정
 - Contoller (컨트롤러명.java) -> 이벤트 호출에 응답하는 Service 메소드 실행 (데이터는 이동만 연산 처리는 Service 에서)
