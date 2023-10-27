@@ -1,11 +1,8 @@
 ## MyPlanner-ver1.0
-MyPlanner-ver1.0 (personal project 2023-10-14)
+- MyPlanner-ver1.0 (personal project 2023-10-14)
 : Spring Boot + thymeleaf로 제작한 일정 관리 어플리케이션
-<br>
-<br>
-
-## 시작 페이지 접근 방법
-- http://localhost:8090/myplanner/loginform
+- 시작 페이지 접근 방법
+: http://localhost:8090/myplanner/loginform
 <br>
 
 ## 프로젝트 소개
